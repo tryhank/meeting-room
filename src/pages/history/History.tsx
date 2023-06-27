@@ -1,43 +1,25 @@
-import { Avatar, List, Radio, Space } from 'antd';
-import React, { useState } from 'react';
+import React from "react";
+import { List, Typography } from "antd";
 
 const data = [
-  {
-    title: 'Ant Design Title 1',
-  },
-  {
-    title: 'Ant Design Title 2',
-  },
-  {
-    title: 'Ant Design Title 3',
-  },
-  {
-    title: 'Ant Design Title 4',
-  },
+  "Racing car sprays burning fuel into crowd.",
+  "Japanese princess to wed commoner.",
+  "Australian walks 100km after outback crash.",
+  "Man charged over missing wedding girl.",
+  "Los Angeles battles huge wildfires.",
 ];
 
-const History: React.FC = () => {
+const App: React.FC = () => (
+  <List
+    bordered
+    pagination={{}}
+    dataSource={data}
+    renderItem={(item) => (
+      <List.Item actions={[<a key="list-loadmore-edit">撤销预定</a>]}>
+        <Typography.Text mark>[ITEM]</Typography.Text> {item}
+      </List.Item>
+    )}
+  />
+);
 
-  return (
-    <>
-     <span>http://127.0.0.1:5173/</span>
-      <List
-        pagination
-        dataSource={data}
-        renderItem={(item, index) => (
-          <List.Item>
-            <List.Item.Meta
-              avatar={
-                <Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`} />
-              }
-              title={<a href="https://ant.design">{item.title}</a>}
-              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-            />
-          </List.Item>
-        )}
-      />
-    </>
-  );
-};
-
-export default History;
+export default App;
