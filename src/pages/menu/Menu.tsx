@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu } from "antd";
+import { Outlet, Link } from "react-router-dom";
 
 const { Header, Content, Sider } = Layout;
 
@@ -9,21 +10,27 @@ type MenuItem = Required<MenuProps>["items"][number];
 function getItem(
   label: React.ReactNode,
   key: React.Key,
+  icon?: React.ReactNode,
   children?: MenuItem[]
 ): MenuItem {
   return {
     key,
+    icon,
     children,
     label,
   } as MenuItem;
 }
 
 const items: MenuItem[] = [
-  getItem("会议室列表", "1"),
-  getItem("预定历史", "2"),
+  getItem(<Link to="/home/list">会议室列表</Link>, "1", <i i-tabler-article />),
+  getItem(
+    <Link to="/home/history">预定历史</Link>,
+    "2",
+    <i i-tabler:history />
+  ),
 ];
 
-const SiderMenu: React.FC = () => {
+const Home: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -64,8 +71,8 @@ const SiderMenu: React.FC = () => {
               },
             ]}
           />
-          <div bg-white flex-grow>
-            Bill is a cat.
+          <div bg-white flex-grow p-8>
+            <Outlet />
           </div>
         </Content>
       </Layout>
@@ -73,4 +80,4 @@ const SiderMenu: React.FC = () => {
   );
 };
 
-export default SiderMenu;
+export default Home;
